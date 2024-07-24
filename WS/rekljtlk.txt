@@ -1,0 +1,19 @@
+Go to the design part and remove the default service by selecting the service and click on remove button
+After that click on add operation button 
+-Give the operation name as "add"
+-Add some variable by clicking on add and give the name of the variable and type
+-Make sure that the type is "java.lang.Int" for the variable which is next to variable name and the return type as "int"
+
+Make the same for sub, mult, divide
+after that you should have four operation on the design page
+Go to the webservice folder and go to your webserviceapp
+and edit the return value of every function you created which is add, sub, mult, div
+for example this is the mult operation function edit the return from 0 to first*second so it multiplies it
+
+@WebMethod(operationName = "mult")
+    public int mult(@WebParam(name = "first") int first, @WebParam(name = "second") int second) {
+        //TODO write your implementation code here:
+        return first*second;
+    }
+
+Do this for every other function

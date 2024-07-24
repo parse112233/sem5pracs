@@ -1,0 +1,113 @@
+WS Practical 2
+
+Create a new netbeans project
+click on new project
+click on java web
+and then click on Web Application
+then click on next
+change the name to TimeServer
+And then finish
+then right click on the newly create timeserver web application and click on new 
+and click on web service
+then give the webservice name as time server
+and paste this code 
+------------------------------------------------------------------------------------------
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pack;
+
+import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+
+/**
+ *
+ * @author admin
+ */
+@WebService(serviceName = "TimeServer")
+public class TimeServer {
+
+    /**
+     * This is a sample web service operation
+     */
+    @WebMethod(operationName = "getTimeAsString")
+    public String getTimeAsString() {
+        return new java.util.Date().toString();
+    }
+    
+    @WebMethod(operationName = "getTimeEllapsed")
+    public long getTimeEllapsed() {
+        return new java.util.Date().getTime();
+    }
+    
+}
+
+--------------------------------------------------------------------------------------------------------
+then right click on the web application and deploy
+again right click on the web Service and test it 
+then it will be redirected to the browser
+and then click on "WSDL File"
+then save the url some where (ex:http://localhost:8080/TImeServer102/TimeServer?WSDL)
+
+
+PHP xammp configuration:-
+1.Go to - C:\xampp\php
+2.Open php configuration file 
+3.Press Ctrl + F to find and find "soap"
+4.You will see a ";extension=soap"
+5.If there is a semi colon remove it
+6.And save the file with Ctrl + S
+
+Create php client in this location
+C:\xampp\htdocs
+create a timeServer.php
+paste this code 
+<?php
+$client=new SoapClient("http://localhost:8080/TImeServer102/TimeServer?WSDL");
+$t1=$client->getTimeAsString();
+echo "Current Time as String ",$t1->return;
+$t2=$client->getTimeEllapsed();
+echo "Time Ellapsed ",$t2->return;
+?>
+save it
+then open xampp and run apache and mysql
+then click the admin button beside the apache start button
+then go to localhost/timeServer.php
+
+Create a new project in Visual Studio (the purple vscode)
+ASP.NET Web Application(.NET Framework) C#
+Click on Next 
+make sure that "configure https" is off on the right side
+and then create
+Once opened go to the file structure and right click on the project name
+and click on add 
+then find web form and add it
+next , again right click and click on add then click service refernce
+paste the wsdl file location example"http://localhost:8000/TimeServer/TimeServer?WSDL"
+then click on go
+then create a two button and two label for TimeString and TimeEllapsed
+then double click on the button's it should redirect to WebForm1.apsx.cs
+then add this code in the button's function
+protected void Button1_Click(object sender, EventArgs e)
+        {
+            ServiceReference1.TimeServerClient client = new ServiceReference1.TimeServerClient();
+            Label1.Text = client.getTimeAsString();
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            ServiceReference1.TimeServerClient client = new ServiceReference1.TimeServerClient();
+            Label2.Text = Convert.ToString(client.getTimeEllapsed());
+        }
+then right click on the WebForm1.aspx and right click and click on set as start page
+the run the code (There is a button in top middel which is in green color)
+
+
+Write a webserivce in java that gives NSE index BSE index and current gold rate these values are stored in a database 
+and the webservice has to access the current content of the database and provide it to the client
+Create a java client that displays these information as per users requirement (The client here is a share trading firm)
+
+
