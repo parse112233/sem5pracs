@@ -3,14 +3,14 @@ import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.preprocessing import LabelEncoder
 
-df = pd.read_excel("./Book1.xlsx")
+df = pd.read_csv("./PlayTennis.csv")
 
 print(df)
 # Convert categorical variables to numerical labels
 le = LabelEncoder()
-df['outlook'] = le.fit_transform(df['outlook'])
+df['Outlook'] = le.fit_transform(df['Outlook'])
 df['temp'] = le.fit_transform(df['temp'])
-df['humidty'] = le.fit_transform(df['humidty'])
+df['Humidity'] = le.fit_transform(df['Humidity'])
 df['windy'] = le.fit_transform(df['windy'])
 df['play'] = le.fit_transform(df['play'])
 
