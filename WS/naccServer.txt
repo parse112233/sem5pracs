@@ -1,0 +1,48 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mypack;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import java.sql.*;
+
+/**
+ *
+ * @author admin
+ */
+@WebService(serviceName = "collegeServer")
+public class collegeServer {
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "get_college_grade")
+    public String get_college_grade(@WebParam(name = "college_name") String college_name) {
+        String grade="";
+           try{
+            
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Connection con=DriverManager.getConnection("jdbc:derby://localhost:1527/collegeDB","college12","college12");
+            Statement stmt=con.createStatement();
+            ResultSet result=stmt.executeQuery("Select * from COLLEGE_TABLE WHERE COLLEGE_NAME='"+college_name+"'");
+            result.next();
+            String clgname = result.getString("COLLEGE_NAME");
+            grade = result.getString("COLLEGE_GRADE");
+            System.out.println(grade);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+       return grade; 
+    }
+      
+}
+
